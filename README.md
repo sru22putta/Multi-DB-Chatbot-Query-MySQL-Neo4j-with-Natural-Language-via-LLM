@@ -123,7 +123,7 @@ The chatbot auto-detects if the user input is in Spanish and:
 
 ### 🧠 LangChain Architecture
 
-![LangChain Architecture](./image.png)
+![LangChain Architecture](./Screenshot%202025-04-09%20160142.png)
 
 ---
 
@@ -141,8 +141,10 @@ The chatbot auto-detects if the user input is in Spanish and:
 - **"Hi there!"**  
   → Friendly casual reply from the LLM
 
-  ### 🔁 Result Snapshot
-
+  ### 🔁 Result Snapshots
+#### Querying
+![Result](./Result%20Snapshot%20(Chatbot).png)
+#### Spanish-English Translation
 ![Result](./result%20snapshot%20(translation).png)
 
 ---
