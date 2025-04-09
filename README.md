@@ -93,6 +93,10 @@ The chatbot auto-detects if the user input is in Spanish and:
 
 ## 🧠 Neo4j Graph Schema (Data Center Layout)
 
+### 🌐 Graph Database Visualization (Neo4j Schema)
+
+![Graph Database](./Graph%20Database.png)
+
 ### Node Types
 
 - `Room`: room_number, room_type, temperature_profile  
@@ -117,6 +121,10 @@ The chatbot auto-detects if the user input is in Spanish and:
 | Room relationships, AC mappings               | Neo4j     |
 | Greetings/casual questions                    | LLM Only  |
 
+### 🧠 LangChain Architecture
+
+![LangChain Architecture](./image.png)
+
 ---
 
 ## 💬 Example Queries
@@ -131,7 +139,11 @@ The chatbot auto-detects if the user input is in Spanish and:
   → Routed to MySQL → Forecast table → SQL query → Returns prediction  
 
 - **"Hi there!"**  
-  → Friendly casual reply from the LLM  
+  → Friendly casual reply from the LLM
+
+  ### 🔁 Result Snapshot
+
+![Result](./result%20snapshot%20(translation).png)
 
 ---
 
