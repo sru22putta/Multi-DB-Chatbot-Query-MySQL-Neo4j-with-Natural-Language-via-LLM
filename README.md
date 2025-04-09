@@ -1,29 +1,32 @@
-# Multi-DB-Chatbot-Query-MySQL-Neo4j-with-Natural-Language-via-LLM
-An LLM-powered chatbot that lets users query real-time sensor data (temperature, occupancy) from MySQL and explore data center layouts via Neo4j. It uses GPT-4o and LangChain to route queries, generate SQL/Cypher, and return natural language answers. Built with Streamlit for an intuitive, chat-based experience.
+# 🤖 Multi-DB Chatbot: Query MySQL & Neo4j with Natural Language via LLM
+
+An LLM-powered chatbot that lets users query real-time sensor data (temperature, occupancy) from MySQL and explore data center layouts via Neo4j. It also supports forecasting queries and Spanish-English translation using Google Translator. Built with Streamlit, LangChain, and OpenAI's GPT-4o, this chatbot intelligently routes queries to the appropriate backend and returns natural language responses.
 
 ---
 
 ## 🚀 Features
 
-- 🔄 **Smart Query Routing** between MySQL and Neo4j
-- 📈 **Real-time Sensor Data** (temperature, occupancy) via MySQL
-- 🧠 **Graph-Based Data Center Mapping** via Neo4j
-- 🧾 **Natural Language to SQL/Cypher Translation** using GPT-4o
-- 💬 **Friendly Conversational Interface** via Streamlit
-- ✅ Handles both **technical queries** and **casual chats**
+- 🔄 Smart Query Routing between MySQL and Neo4j  
+- 🌡️ Real-time Sensor Data (temperature, occupancy) via MySQL  
+- 🧠 Graph-Based Data Center Mapping via Neo4j  
+- 📈 Forecasting Support (Future occupancy predictions)  
+- 🌍 Spanish-English Input and Output Translation  
+- 💬 Friendly Conversational Interface via Streamlit  
+- 🤖 Natural Language to SQL/Cypher using GPT-4o  
+- ✅ Handles both technical queries and casual chats  
 
 ---
 
 ## 🧰 Tech Stack
 
-- **LLM**: OpenAI GPT-4o via LangChain
-- **Databases**: MySQL (relational), Neo4j (graph)
-- **Frontend**: Streamlit
-- **LangChain**: Prompt templates, chains, routers
-- **Python Libraries**: `dotenv`, `sqlalchemy`, `re`, `mysql-connector`, `neo4j`
+- **LLM**: OpenAI GPT-4o via LangChain  
+- **Databases**: MySQL (relational), Neo4j (graph)  
+- **Frontend**: Streamlit  
+- **LangChain**: Prompt templates, chains, routers  
+- **Translation**: Google Translator (via `deep-translator`)  
+- **Python Libraries**: `dotenv`, `sqlalchemy`, `re`, `pandas`, `deep-translator`, `mysql-connector`, `neo4j`
 
 ---
-
 
 ## 🗂️ Project Structure
 
@@ -70,12 +73,21 @@ streamlit run app.py
 
 ---
 
-## 📊 MySQL Schema (Sensor Data)
+## 🌐 Language Support
 
-- **Temperature Sensors**: TS101–TS106 (mapped to Rooms 101–106)  
-- **Occupancy Sensors**: OS101–OS106 (mapped to Rooms 101–106)  
-- **Occupancy Value**: `1` = occupied for 5 minutes, `0` = unoccupied  
-- Group by `DATE(TimeStamp)` for daily aggregation  
+The chatbot auto-detects if the user input is in Spanish and:
+- Translates it to English before querying
+- Translates the English response back to Spanish
+
+---
+
+## 📊 MySQL Schema (Sensor + Forecasting Data)
+
+- **Temperature Sensors**: TS101–TS106 → Rooms 101–106  
+- **Occupancy Sensors**: OS101–OS106 → Rooms 101–106  
+- **Forecast Table**: `forecast_occupancy` (OS101–106, DateColumn, TimeColumn)  
+- **Occupancy Value**: 1 = occupied for 5 mins, 0 = unoccupied  
+- Group by `DATE(TimeStamp)` for daily trends  
 
 ---
 
@@ -83,10 +95,10 @@ streamlit run app.py
 
 ### Node Types
 
-- **Room**: `room_number`, `room_type`, `temperature_profile`  
-- **TemperatureSensor**: `sensor_id`, `profile`  
-- **OccupancySensor**: `sensor_id`, `profile`  
-- **AirConditioningUnit**: `unit_id`  
+- `Room`: room_number, room_type, temperature_profile  
+- `TemperatureSensor`: sensor_id, profile  
+- `OccupancySensor`: sensor_id, profile  
+- `AirConditioningUnit`: unit_id  
 
 ### Relationships
 
@@ -99,26 +111,27 @@ streamlit run app.py
 
 ## 🔀 How Query Routing Works
 
-| Question Type                                 | Routed To |
-|----------------------------------------------|-----------|
-| Temperature, occupancy, timestamped queries  | MySQL     |
-| Room, AC unit, sensor mapping, relationships | Neo4j     |
-| Greetings or casual messages                 | LLM Only  |
-
-LangChain routes the query automatically using a prompt-based router.
+| Question Type                                  | Routed To |
+|-----------------------------------------------|-----------|
+| Sensor data, occupancy, temperature, forecast | MySQL     |
+| Room relationships, AC mappings               | Neo4j     |
+| Greetings/casual questions                    | LLM Only  |
 
 ---
 
 ## 💬 Example Queries
 
-- **"What’s the current occupancy of Room 102?"**  
-  → Routed to MySQL → Generates SQL → Returns human-readable answer  
+- **"¿Está ocupada la habitación 102 ahora?"** (Spanish)  
+  → Translates → Routed to MySQL → SQL generated → Natural language response in Spanish  
 
-- **"Which AC unit cools Room 103?"**  
-  → Routed to Neo4j → Generates Cypher → Returns response  
+- **"Which rooms are cooled by ACU2?"**  
+  → Routed to Neo4j → Cypher generated → Human-readable response  
 
-- **"Hey there!"**  
-  → Detected as casual → Friendly response from LLM  
+- **"Predict occupancy in Room 105 tomorrow morning."**  
+  → Routed to MySQL → Forecast table → SQL query → Returns prediction  
+
+- **"Hi there!"**  
+  → Friendly casual reply from the LLM  
 
 ---
 
@@ -136,7 +149,6 @@ LangChain routes the query automatically using a prompt-based router.
 **Srujan Mohan Putta**  
 📍 California, USA  
 🔗 [LinkedIn](https://www.linkedin.com/in/srujan-putta/)  
-📧 srujanputta4@gmail.com 
+📧 srujanputta4@gmail.com  
 
 ---
-
